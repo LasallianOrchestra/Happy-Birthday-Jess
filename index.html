@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#100a18">
+  <meta name="hyacinth-build" content="2026.07.20-v8.1-display-perfect">
+  <meta name="color-scheme" content="dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="A private futuristic hyacinth birthday garden created for Ralph James Bates, lovingly called Honeybun, on July 22, 2026.">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <title>Hyacinth Birthday Garden // Ralph James Bates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" href="memory-16.jpg" as="image">
+  <link rel="preload" href="hyacinth-glow.svg" as="image" type="image/svg+xml">
+  <link rel="icon" href="hyacinth-favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="garden-github-safe.css?v=1">
+</head>
+<body class="locked">
+  <a class="skip-link" href="#home">Skip to the birthday garden</a>
+  <canvas id="spaceCanvas" aria-hidden="true"></canvas>
+  <canvas id="celebrationCanvas" aria-hidden="true"></canvas>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="botanical-aura" aria-hidden="true"></div>
+  <img class="fixed-hyacinth fixed-hyacinth-left" src="hyacinth-line.svg" alt="">
+  <img class="fixed-hyacinth fixed-hyacinth-right" src="hyacinth-line.svg" alt="">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <div class="boot-screen access-screen" id="accessScreen" role="dialog" aria-modal="true" aria-labelledby="accessTitle" aria-describedby="accessDescription">
+    <div class="access-ambient" aria-hidden="true">
+      <span class="ambient-orb orb-a"></span>
+      <span class="ambient-orb orb-b"></span>
+      <span class="ambient-orb orb-c"></span>
+      <span class="ambient-grid"></span>
+    </div>
+
+    <div class="access-layout" id="accessLayout">
+      <header class="access-header">
+        <div class="access-brand">
+          <span class="access-brand-mark" aria-hidden="true">✿</span>
+          <span class="access-brand-copy">
+            <strong>Hyacinth Birthday Garden</strong>
+            <small>Made with love by Nicu</small>
+          </span>
+        </div>
+        <div class="access-header-badge"><i></i><span>PRIVATE GIFT</span><b>07.22.2026</b></div>
+      </header>
+
+      <div class="access-main">
+        <section class="access-visual" aria-hidden="true">
+          <div class="flower-console" id="flowerConsole">
+            <div class="flower-rings">
+              <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="hyacinth-core" id="hyacinthCore">
+              <span class="core-glow"></span>
+              <span class="core-flower">✿</span>
+            </div>
+            <div class="petal-orbit orbit-one">
+              <i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <div class="petal-orbit orbit-two">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <p class="flower-status" id="flowerStatus">HYACINTH SIGNAL · WAITING FOR YOU</p>
+          </div>
+
+          <div class="visual-copy">
+            <p class="micro-label">FOR RALPH JAMES BATES</p>
+            <h1 id="accessTitle">A bloom made only for you.</h1>
+            <p id="accessDescription">A private birthday universe for <span id="accessRecipientName">Ralph James Bates</span> — my Honeybun.</p>
+          </div>
+        </section>
+
+        <section class="access-card access-panel">
+          <div class="panel-flower-mark" aria-hidden="true">✿</div>
+          <div class="access-panel-head">
+            <p class="micro-label">GARDEN ACCESS</p>
+            <h2>Unlock our bloom.</h2>
+            <p class="access-panel-copy">Enter the date that belongs only to us. The memories, letter, and our song will open together.</p>
+          </div>
+
+          <div class="access-progress" aria-label="Password bloom progress">
+            <div class="access-progress-head"><span>BLOOM PROGRESS</span><strong id="bloomPercent">0%</strong></div>
+            <div class="progress-track"><span id="passwordBloomProgress"></span></div>
+            <div class="progress-petals" id="progressPetals" aria-hidden="true">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+          </div>
+
+          <form class="access-form" id="accessForm" novalidate>
+            <label for="passwordInput">Our special date</label>
+            <div class="password-wrap">
+              <span class="password-icon" aria-hidden="true">✿</span>
+              <input id="passwordInput" name="garden-password" type="password" autocomplete="off" autocapitalize="words" spellcheck="false" placeholder="Enter the complete date" aria-describedby="passwordHint accessError" required>
+              <button class="password-toggle" id="passwordToggle" type="button" aria-label="Show password" aria-pressed="false">SHOW</button>
+            </div>
+            <p class="access-hint" id="passwordHint"><span>HINT</span> The date our story officially began. Use the complete month, day, and year.</p>
+            <p class="access-error" id="accessError" role="alert" aria-live="polite"></p>
+            <button class="button primary access-button magnetic" id="unlockGardenButton" type="submit">
+              <span>Open the Garden</span><strong>↗</strong>
+            </button>
+          </form>
+
+          <p class="boot-note">Our song starts after the correct password opens the garden.</p>
+        </section>
+      </div>
+
+      <div class="access-dashboard" aria-label="Garden status">
+        <div><span class="dashboard-icon">✦</span><p><small>MEMORIES</small><strong>20 BLOOMS READY</strong></p></div>
+        <div><span class="dashboard-icon">♡</span><p><small>LOVE LETTER</small><strong>SEALED FOR YOU</strong></p></div>
+        <div><span class="dashboard-icon">♫</span><p><small>OUR SONG</small><strong>READY TO PLAY</strong></p></div>
+        <div><span class="dashboard-icon secure">●</span><p><small>ACCESS</small><strong>PRIVATE &amp; LOCKED</strong></p></div>
+      </div>
+    </div>
+
+    <div class="access-petal-layer" id="accessPetalLayer" aria-hidden="true"></div>
+  </div>
+
+  <noscript>
+    <div class="noscript-message">JavaScript must be enabled to unlock and experience this birthday garden.</div>
+  </noscript>
+
+  <header class="site-header" id="siteHeader" inert>
+    <a class="wordmark" href="#home" aria-label="Birthday Protocol home">
+      <span class="wordmark-mark">HB</span>
+      <span><b>Hyacinth</b><small>Birthday Garden</small></span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Main navigation">
+      <a href="#home" aria-current="page">Home</a>
+      <a href="#memories">Memories</a>
+      <a href="#constellation">Stars</a>
+      <a href="#signals">Blooms</a>
+      <a href="#letter">Letter</a>
+      <a href="#poem">Poem</a>
+      <a href="#capsule">Capsule</a>
+      <a href="#surprise">Surprise</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="round-button" id="musicButton" type="button" aria-label="Play background music" title="Play Perfect — Ed Sheeran">
+        <span class="equalizer"><i></i><i></i><i></i></span>
+      </button>
+      <button class="round-button lock-button" id="lockButton" type="button" aria-label="Lock the private garden" title="Lock the private garden">
+        <span aria-hidden="true">⌑</span>
+      </button>
+      <button class="round-button settings-button" id="settingsButton" type="button" aria-label="Open garden settings" title="Garden settings">
+        <span aria-hidden="true">✦</span>
+      </button>
+      <button class="round-button menu-button" id="menuButton" type="button" aria-label="Open navigation" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-panel" id="mobilePanel" aria-hidden="true" inert>
+    <a href="#home">01 — Home</a>
+    <a href="#memories">02 — Memories</a>
+    <a href="#constellation">03 — Our Constellation</a>
+    <a href="#signals">04 — Love in Bloom</a>
+    <a href="#letter">05 — Letter</a>
+    <a href="#poem">06 — Poem</a>
+    <a href="#capsule">07 — Time Capsule</a>
+    <a href="#surprise">08 — Surprise</a>
+  </div>
+
+  <main inert>
+    <section class="hero section" id="home">
+      <div class="hero-grid">
+        <div class="hero-copy reveal">
+          <div class="status-pill"><span></span> GARDEN ONLINE · JULY 22, 2026</div>
+          <p class="kicker">A futuristic garden, grown from our memories</p>
+          <h1>Happy birthday,<br><em id="heroName">Ralph James Bates.</em></h1>
+          <p class="hero-message" id="heroMessage">Bunbun, I grew this little digital garden from our memories, our love, and every moment that made us choose each other.</p>
+          <div class="hero-actions">
+            <a class="button primary magnetic" href="#memories"><span>Walk Through Our Garden</span><strong>↓</strong></a>
+            <button class="button ghost magnetic" id="heartButton" type="button"><span>Send a Hyacinth Bloom</span><strong>♡</strong></button>
+          </div>
+          <div class="hero-meta">
+            <div><small>RECIPIENT</small><strong id="recipientName">Ralph James Bates · Honeybun</strong></div>
+            <div><small>CREATED BY</small><strong id="creatorName">Your Bunbun</strong></div>
+            <div><small>FAVORITE FLOWER</small><strong>HYACINTH</strong></div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal delay-1">
+          <img class="hero-hyacinth" src="hyacinth-glow.svg" alt="Purple hyacinth flowers glowing around our memories" decoding="async">
+          <div class="visual-radar" aria-hidden="true">
+            <span class="radar-ring r1"></span>
+            <span class="radar-ring r2"></span>
+            <span class="radar-ring r3"></span>
+            <span class="radar-sweep"></span>
+          </div>
+          <div class="portrait-shell tilt-card">
+            <div class="portrait-frame">
+              <img src="memory-16.jpg" alt="A favorite portrait of the birthday celebrant" loading="eager" decoding="async" fetchpriority="high">
+              <div class="portrait-overlay"></div>
+              <span class="corner top-left"></span><span class="corner top-right"></span>
+              <span class="corner bottom-left"></span><span class="corner bottom-right"></span>
+            </div>
+            <div class="portrait-data top"><span>HONEYBUN_0722</span><b>BLOOMING</b></div>
+            <div class="portrait-data bottom"><span>LOVE IN BLOOM</span><b>∞</b></div>
+          </div>
+          <div class="floating-photo fp-one"><img src="memory-03.jpg" alt="A memory together" loading="lazy" decoding="async"></div>
+          <div class="floating-photo fp-two"><img src="memory-15.jpg" alt="Another memory together" loading="lazy" decoding="async"></div>
+          <div class="orbit-label label-one">FAVORITE<br>FLOWER</div>
+          <div class="orbit-label label-two">LOVE<br>ROOTED</div>
+        </div>
+      </div>
+
+      <div class="countdown-console reveal delay-2" aria-labelledby="countdownTitle">
+        <div class="console-title">
+          <span class="console-dot"></span>
+          <div><small>TIME UNTIL FULL BLOOM</small><h2 id="countdownTitle">Birthday bloom sequence</h2></div>
+        </div>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <div><strong id="days">00</strong><span>DAYS</span></div>
+          <i>:</i>
+          <div><strong id="hours">00</strong><span>HOURS</span></div>
+          <i>:</i>
+          <div><strong id="minutes">00</strong><span>MINUTES</span></div>
+          <i>:</i>
+          <div><strong id="seconds">00</strong><span>SECONDS</span></div>
+        </div>
+        <div class="console-code">BLOOM_DATE // 2026.07.22 // GMT+08</div>
+      </div>
+
+      <section class="love-dashboard reveal" aria-labelledby="dashboardTitle">
+        <div class="dashboard-intro">
+          <p class="kicker">Live garden telemetry</p>
+          <h2 id="dashboardTitle">Our story is still<br><em>growing in real time.</em></h2>
+          <p>Every number here updates inside the garden—from the days since our story began to the memories and wishes we keep planting.</p>
+          <div class="dashboard-actions">
+            <button class="button ghost magnetic" id="navigatorButton" type="button"><span>Open Garden Navigator</span><strong>⌘K</strong></button>
+            <button class="hold-bloom" id="holdBloomButton" type="button" aria-label="Press and hold to grow a love bloom">
+              <span class="hold-bloom-ring"></span><i>♡</i><b>Hold to bloom</b>
+            </button>
+          </div>
+        </div>
+        <div class="dashboard-metrics">
+          <article><span>01</span><strong id="daysTogether">0</strong><small>DAYS TOGETHER</small></article>
+          <article><span>02</span><strong>20</strong><small>MEMORY BLOOMS</small></article>
+          <article><span>03</span><strong id="dashboardFavoriteCount">0</strong><small>FAVORITE BLOOMS</small></article>
+          <article><span>04</span><strong id="dashboardWishCount">0</strong><small>WISHES PLANTED</small></article>
+        </div>
+        <nav class="garden-route" aria-label="Quick garden route">
+          <a href="#memories"><b>01</b><span>Memory Garden</span><i>→</i></a>
+          <a href="#constellation"><b>02</b><span>Our Constellation</span><i>→</i></a>
+          <a href="#letter"><b>03</b><span>Private Letter</span><i>→</i></a>
+          <a href="#poem"><b>04</b><span>Birthday Poem</span><i>→</i></a>
+          <a href="#capsule"><b>05</b><span>Time Capsule</span><i>→</i></a>
+          <a href="#surprise"><b>06</b><span>Everlasting Surprise</span><i>→</i></a>
+        </nav>
+      </section>
+    </section>
+
+    <section class="memory-section section" id="memories">
+      <img class="section-hyacinth memory-hyacinth" src="hyacinth-line.svg" alt="" aria-hidden="true">
+      <div class="section-heading reveal">
+        <div>
+          <p class="kicker">Memory garden // 20 blooms preserved</p>
+          <h2>Memories worth<br><em>keeping in bloom.</em></h2>
+        </div>
+        <div class="heading-side">
+          <p>Every photo is a flower in our garden. Tap a memory to let it bloom full-screen, then use the arrows, keyboard, shuffle, or auto-play to wander through our story.</p>
+          <div class="archive-controls">
+            <button class="chip-button" id="shuffleButton" type="button">⤨ Shuffle</button>
+            <button class="chip-button" id="autoPlayButton" type="button" aria-pressed="false">▶ Auto-play</button>
+            <button class="chip-button favorites-button" id="favoritesButton" type="button" aria-label="Open saved favorite memories"><span>♡ Favorites</span><b id="favoriteCount">0</b></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-discovery reveal" aria-label="Memory garden filters">
+        <div class="memory-filter-row" id="memoryFilters" role="group" aria-label="Filter memories">
+          <button class="memory-filter active" type="button" data-memory-filter="all" aria-pressed="true">All blooms <b>20</b></button>
+          <button class="memory-filter" type="button" data-memory-filter="together" aria-pressed="false">Together</button>
+          <button class="memory-filter" type="button" data-memory-filter="outdoors" aria-pressed="false">Outdoors</button>
+          <button class="memory-filter" type="button" data-memory-filter="playful" aria-pressed="false">Playful</button>
+          <button class="memory-filter" type="button" data-memory-filter="newest" aria-pressed="false">Newest</button>
+        </div>
+        <label class="memory-search" for="memorySearch"><span>⌕</span><input id="memorySearch" type="search" placeholder="Search a memory or feeling" autocomplete="off"><kbd>/</kbd></label>
+        <p id="memoryFilterStatus" aria-live="polite">Showing all 20 memory blooms.</p>
+      </div>
+
+      <div class="featured-memory reveal">
+        <button class="featured-arrow prev" id="featuredPrev" type="button" aria-label="Previous featured photo">←</button>
+        <div class="featured-stage tilt-card" id="featuredStage">
+          <img id="featuredImage" src="memory-01.jpg" alt="Featured memory" decoding="async">
+          <div class="featured-shader"></div>
+          <div class="featured-ui">
+            <span id="featuredIndex">BLOOM // 01</span>
+            <strong id="featuredCaption">One of the moments I keep replaying</strong>
+            <small>Tap to view full screen</small>
+          </div>
+          <button class="memory-favorite-button" id="favoriteCurrentButton" type="button" aria-label="Save this memory as a favorite" aria-pressed="false"><span>♡</span><small>Save bloom</small></button>
+          <div class="focus-box" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        </div>
+        <button class="featured-arrow next" id="featuredNext" type="button" aria-label="Next featured photo">→</button>
+      </div>
+
+      <div class="memory-strip reveal" id="memoryStrip" aria-label="Memory thumbnails">
+        <button class="memory-thumb active" data-index="0"><img src="memory-01.jpg" alt="Memory 1"><span>01</span></button>
+        <button class="memory-thumb" data-index="1"><img src="memory-02.jpg" alt="Memory 2" loading="lazy" decoding="async"><span>02</span></button>
+        <button class="memory-thumb" data-index="2"><img src="memory-03.jpg" alt="Memory 3" loading="lazy" decoding="async"><span>03</span></button>
+        <button class="memory-thumb" data-index="3"><img src="memory-04.jpg" alt="Memory 4" loading="lazy" decoding="async"><span>04</span></button>
+        <button class="memory-thumb" data-index="4"><img src="memory-05.jpg" alt="Memory 5" loading="lazy" decoding="async"><span>05</span></button>
+        <button class="memory-thumb" data-index="5"><img src="memory-06.jpg" alt="Memory 6" loading="lazy" decoding="async"><span>06</span></button>
+        <button class="memory-thumb" data-index="6"><img src="memory-07.jpg" alt="Memory 7" loading="lazy" decoding="async"><span>07</span></button>
+        <button class="memory-thumb" data-index="7"><img src="memory-08.jpg" alt="Memory 8" loading="lazy" decoding="async"><span>08</span></button>
+        <button class="memory-thumb" data-index="8"><img src="memory-09.jpg" alt="Memory 9" loading="lazy" decoding="async"><span>09</span></button>
+        <button class="memory-thumb" data-index="9"><img src="memory-10.jpg" alt="Memory 10" loading="lazy" decoding="async"><span>10</span></button>
+        <button class="memory-thumb" data-index="10"><img src="memory-11.jpg" alt="Memory 11" loading="lazy" decoding="async"><span>11</span></button>
+        <button class="memory-thumb" data-index="11"><img src="memory-12.jpg" alt="Memory 12" loading="lazy" decoding="async"><span>12</span></button>
+        <button class="memory-thumb" data-index="12"><img src="memory-13.jpg" alt="Memory 13" loading="lazy" decoding="async"><span>13</span></button>
+        <button class="memory-thumb" data-index="13"><img src="memory-14.jpg" alt="Memory 14" loading="lazy" decoding="async"><span>14</span></button>
+        <button class="memory-thumb" data-index="14"><img src="memory-15.jpg" alt="Memory 15" loading="lazy" decoding="async"><span>15</span></button>
+        <button class="memory-thumb" data-index="15"><img src="memory-16.jpg" alt="Memory 16" loading="lazy" decoding="async"><span>16</span></button>
+        <button class="memory-thumb new-memory-thumb" data-index="16"><img src="memory-17.jpg" alt="Memory 17 — a close embrace at home" loading="lazy" decoding="async"><span>17</span></button>
+        <button class="memory-thumb new-memory-thumb" data-index="17"><img src="memory-18.jpg" alt="Memory 18 — a playful butterfly pose" loading="lazy" decoding="async"><span>18</span></button>
+        <button class="memory-thumb new-memory-thumb" data-index="18"><img src="memory-19.jpg" alt="Memory 19 — matching poses together" loading="lazy" decoding="async"><span>19</span></button>
+        <button class="memory-thumb new-memory-thumb" data-index="19"><img src="memory-20.jpg" alt="Memory 20 — a handmade bouquet and a warm smile" loading="lazy" decoding="async"><span>20</span></button>
+      </div>
+
+      <div class="memory-grid" id="memoryGrid">
+        <button class="grid-memory large reveal" data-index="2"><img src="memory-03.jpg" alt="A playful selfie together" loading="lazy" decoding="async"><span><b>03</b><small>US, BEING US</small></span></button>
+        <button class="grid-memory tall reveal delay-1" data-index="12"><img src="memory-13.jpg" alt="An evening photo together" loading="lazy" decoding="async"><span><b>13</b><small>BLUE HOUR</small></span></button>
+        <button class="grid-memory reveal delay-2" data-index="9"><img src="memory-10.jpg" alt="An outdoor selfie" loading="lazy" decoding="async"><span><b>10</b><small>ON THE WAY</small></span></button>
+        <button class="grid-memory reveal" data-index="13"><img src="memory-14.jpg" alt="A photo through a phone screen" loading="lazy" decoding="async"><span><b>14</b><small>DOUBLE EXPOSURE</small></span></button>
+        <button class="grid-memory wide reveal delay-1" data-index="15"><img src="memory-16.jpg" alt="A favorite close selfie" loading="lazy" decoding="async"><span><b>16</b><small>THE TWO OF US</small></span></button>
+        <button class="grid-memory reveal delay-2" data-index="11"><img src="memory-12.jpg" alt="A portrait together" loading="lazy" decoding="async"><span><b>12</b><small>RIGHT HERE</small></span></button>
+      </div>
+
+      <section class="new-blooms reveal" aria-labelledby="newBloomsTitle">
+        <div class="new-blooms-aura" aria-hidden="true"></div>
+        <div class="new-blooms-heading">
+          <div>
+            <p class="kicker">Newly planted // four highlighted memories</p>
+            <h3 id="newBloomsTitle">The newest blooms<br><em>in our garden.</em></h3>
+          </div>
+          <div class="new-blooms-copy">
+            <p>Four more moments that deserve their own little spotlight—soft, playful, and unmistakably ours.</p>
+            <button class="chip-button new-blooms-open" id="newBloomsButton" type="button"><span>Open this chapter</span><strong>↗</strong></button>
+          </div>
+        </div>
+
+        <div class="new-blooms-grid">
+          <button class="new-bloom-card new-bloom-feature tilt-card" type="button" data-index="19" aria-label="Open highlighted memory 20 in full screen">
+            <img src="memory-20.jpg" alt="Ralph and Nicu smiling together with a handmade red flower bouquet" loading="lazy" decoding="async">
+            <span class="new-bloom-badge">FEATURED BLOOM</span>
+            <span class="new-bloom-content"><b>20</b><strong>Love, handmade</strong><small>A bouquet, a smile, and a moment worth preserving.</small></span>
+            <i aria-hidden="true">✿</i>
+          </button>
+
+          <button class="new-bloom-card tilt-card" type="button" data-index="16" aria-label="Open highlighted memory 17 in full screen">
+            <img src="memory-17.jpg" alt="Ralph and Nicu sitting close with an arm around each other" loading="lazy" decoding="async">
+            <span class="new-bloom-badge">NEW BLOOM</span>
+            <span class="new-bloom-content"><b>17</b><strong>Close feels like home</strong><small>The kind of comfort I never want to outgrow.</small></span>
+            <i aria-hidden="true">✿</i>
+          </button>
+
+          <button class="new-bloom-card tilt-card" type="button" data-index="17" aria-label="Open highlighted memory 18 in full screen">
+            <img src="memory-18.jpg" alt="Ralph and Nicu posing playfully with butterfly-shaped hands" loading="lazy" decoding="async">
+            <span class="new-bloom-badge">NEW BLOOM</span>
+            <span class="new-bloom-content"><b>18</b><strong>Our playful language</strong><small>We can turn an ordinary room into our own little world.</small></span>
+            <i aria-hidden="true">✿</i>
+          </button>
+
+          <button class="new-bloom-card new-bloom-wide tilt-card" type="button" data-index="18" aria-label="Open highlighted memory 19 in full screen">
+            <img src="memory-19.jpg" alt="Ralph and Nicu making matching hand poses at a café" loading="lazy" decoding="async">
+            <span class="new-bloom-badge">NEW BLOOM</span>
+            <span class="new-bloom-content"><b>19</b><strong>Matching energy</strong><small>Two poses, one mood, and another memory that looks exactly like us.</small></span>
+            <i aria-hidden="true">✿</i>
+          </button>
+        </div>
+      </section>
+    </section>
+
+    <section class="constellation-section section" id="constellation" aria-labelledby="constellationTitle">
+      <img class="section-hyacinth constellation-hyacinth" src="hyacinth-line.svg" alt="" aria-hidden="true">
+      <div class="section-heading reveal">
+        <div>
+          <p class="kicker">Our constellation // twenty stars</p>
+          <h2 id="constellationTitle">Every memory became<br><em>a light in our sky.</em></h2>
+        </div>
+        <div class="heading-side">
+          <p>Move through our constellation and choose a star. Each point opens one memory, one feeling, and one small piece of us.</p>
+          <div class="archive-controls">
+            <button class="chip-button" id="constellationShuffle" type="button">✦ Find a star</button>
+            <button class="chip-button" id="constellationOpen" type="button">↗ Open memory</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="constellation-console reveal delay-1">
+        <div class="constellation-map-wrap">
+          <svg class="constellation-map" id="constellationMap" viewBox="0 0 800 620" role="img" aria-label="Interactive constellation of twenty memories"></svg>
+          <div class="constellation-center" aria-hidden="true"><span>✿</span><b>US</b><small>ROOTED</small></div>
+          <div class="constellation-legend"><span><i></i>MEMORY STAR</span><span><i></i>SELECTED</span><span><i></i>FAVORITE</span></div>
+        </div>
+        <article class="constellation-detail" id="constellationDetail">
+          <div class="constellation-photo"><img id="constellationImage" src="memory-01.jpg" alt="Selected constellation memory" loading="lazy" decoding="async"><span id="constellationIndex">STAR // 01</span></div>
+          <div class="constellation-copy">
+            <p class="micro-label">SELECTED MEMORY</p>
+            <h3 id="constellationCaption">One of the moments I keep replaying</h3>
+            <p id="constellationMessage">Some memories do not need a grand occasion. They become important simply because you were there.</p>
+            <div class="constellation-nav">
+              <button type="button" id="constellationPrev" aria-label="Previous constellation memory">←</button>
+              <div><span id="constellationProgress">01 / 20</span><i><b id="constellationProgressBar"></b></i></div>
+              <button type="button" id="constellationNext" aria-label="Next constellation memory">→</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="signals-section section" id="signals">
+      <div class="signals-orbit" aria-hidden="true"></div>
+      <div class="section-heading compact reveal">
+        <div>
+          <p class="kicker">Love in bloom // six reasons</p>
+          <h2>Reasons my heart<br><em>keeps choosing you.</em></h2>
+        </div>
+        <p>Tap each petal to make the message inside bloom.</p>
+      </div>
+
+      <div class="signal-grid">
+        <button class="signal-card reveal" type="button">
+          <span class="signal-id">PETAL_01</span><span class="signal-icon">☼</span>
+          <h3>Your warmth</h3><p>You make people feel safe, seen, and cared for. Being near you feels like coming home.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+        <button class="signal-card reveal delay-1" type="button">
+          <span class="signal-id">PETAL_02</span><span class="signal-icon">⌁</span>
+          <h3>Your laugh</h3><p>It is one of my favorite sounds—and the fastest shortcut to making even an ordinary day better.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+        <button class="signal-card reveal delay-2" type="button">
+          <span class="signal-id">PETAL_03</span><span class="signal-icon">✦</span>
+          <h3>Your strength</h3><p>You keep moving forward even when life gets heavy. I notice it. I admire it. I am proud of you.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+        <button class="signal-card reveal" type="button">
+          <span class="signal-id">PETAL_04</span><span class="signal-icon">♡</span>
+          <h3>Your heart</h3><p>You care with sincerity and love with your whole heart. That kind of gentleness is rare.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+        <button class="signal-card reveal delay-1" type="button">
+          <span class="signal-id">PETAL_05</span><span class="signal-icon">∞</span>
+          <h3>Our weird little moments</h3><p>The silly faces, random walks, sleepy selfies, and private jokes are some of my favorite memories.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+        <button class="signal-card reveal delay-2" type="button">
+          <span class="signal-id">PETAL_06</span><span class="signal-icon">◎</span>
+          <h3>The way you are you</h3><p>No one else could replace your exact mix of softness, chaos, courage, and charm. You are singular.</p>
+          <span class="decrypt">TAP TO BLOOM</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="story-section section">
+      <div class="section-heading reveal">
+        <div><p class="kicker">Our seasons together</p><h2>Our love story,<br><em>one season at a time.</em></h2></div>
+        <p class="heading-side-copy">Like hyacinths, love can grow quietly and still fill a whole space with beauty—in walks, conversations, laughter, forgiveness, and the choice to keep showing up.</p>
+      </div>
+      <div class="story-track">
+        <article class="story-node reveal">
+          <span class="node-orb">01</span><small>FIRST SPROUT</small><h3>When our online conversation became something real</h3><p>The moment we talked online, something in me already knew: “Ito na iyong hinihintay ko.” Somehow, the universe listened—and brought you to me.</p>
+        </article>
+        <article class="story-node reveal delay-1">
+          <span class="node-orb">02</span><small>TAKING ROOT</small><h3>When choosing each other became our strength</h3><p>We had fights and difficult seasons, but even when we nearly lost each other, we stayed, listened, forgave, and chose our love again.</p>
+        </article>
+        <article class="story-node reveal delay-2">
+          <span class="node-orb">03</span><small>IN FULL BLOOM</small><h3>Still growing toward a lifetime with you</h3><p>This is only our beginning. I still dream of more places, more memories, more growth, and growing grey and old beside you.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="letter-section section" id="letter">
+      <img class="section-hyacinth letter-hyacinth" src="hyacinth-glow.svg" alt="" aria-hidden="true">
+      <div class="letter-console reveal">
+        <div class="terminal-bar"><span></span><span></span><span></span><b>LOVE_LETTER.bloom</b><small>ROOTED CONNECTION</small></div>
+        <div class="terminal-body">
+          <div class="terminal-aside">
+            <div class="letter-photo"><img src="memory-12.jpg" alt="A close memory together" loading="lazy" decoding="async"><span class="scan-beam"></span></div>
+            <div class="terminal-stats"><span>WORDS STORED <b>∞</b></span><span>FEELING <b>REAL</b></span><span>DESTINATION <b>YOU</b></span></div>
+          </div>
+          <div class="terminal-copy">
+            <p class="terminal-prompt">nicu@heart:~$ bloom honeybun-letter.txt</p>
+            <h2>A message for <em id="letterName">you</em>.</h2>
+            <div class="encrypted-letter" id="encryptedLetter" aria-live="polite">
+              <p>✿✿✿ ✿✿✿✿✿ ✿✿✿✿ ✿✿✿✿✿✿✿ ✿✿✿✿✿.</p>
+              <p>✿✿✿✿✿✿ ✿✿✿✿ ✿✿✿✿✿ ✿✿✿ ✿✿✿✿✿✿.</p>
+              <p>✿✿✿ ✿✿✿✿✿✿ ✿✿✿✿ ✿✿✿✿✿✿✿.</p>
+            </div>
+            <div class="decoded-letter" id="decodedLetter" hidden>
+              <p>Hello, bunbun!</p>
+              <p>It's your birthday, and I want you to be happy always. I made this website for you; it's full of our memories and achievements that we have done together. I am very glad that I have a boyfriend like you. I am loud and proud always because this is the moment that I can truly say, <strong class="love-highlight">“I AM IN LOVED.”</strong></p>
+              <p>The moment I met and talked to you online, I knew for myself, <strong class="love-highlight">“Ito na iyong hinihintay ko,”</strong> and the universe was truly listening to me—<strong class="love-highlight">“Napa saakin ka na.”</strong></p>
+              <p>We had a lot of fights and wars, but together, we chose each other. I remember when we had a fight and we nearly lost each other. In my mind, there were a lot of questions, but this is where you amazed me the most. I am not a perfect boyfriend nor a very good boy, haha, but you still chose to stay because, as you said, <strong class="love-highlight">“I still love you,”</strong> and I truly marked and noted this in my tiny little heart.</p>
+              <p class="love-quote">Mahirap pala ako mahalin, pero ginawa mong basic.</p>
+              <p>Bunbun, I hope we are still together in the future because I have a lot of plans for both of us, and this is just our beginning. I hope and pray always to God that the guy I am with today is the guy I will be with until we are grey and old.</p>
+              <p>May God always bless you and your family. May God always be with you, and may God always be with us.</p>
+              <p>It's your birthday, and I hope this simple gift has a place in your heart. Hayaan mo, bunbun, pag yumaman ako, syempre kasama ka doon.</p>
+              <p>I love you always, to the moon and back.</p>
+              <p class="love-quote final-love">I love you.</p>
+              <p class="signature">Your makulit na boyfriend,<br><strong id="signatureName">Nicu</strong></p>
+            </div>
+            <div class="letter-actions">
+              <button class="button primary magnetic" id="decryptButton" type="button"><span>Let My Letter Bloom</span><strong>⌁</strong></button>
+              <button class="button ghost" id="letterReadButton" type="button" disabled><span>Read It to Me</span><strong>◉</strong></button>
+              <button class="button ghost" id="letterCopyButton" type="button" disabled><span>Copy Letter</span><strong>⧉</strong></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="poem-section section" id="poem" aria-labelledby="poemSectionTitle">
+      <img class="section-hyacinth poem-hyacinth-left" src="hyacinth-line.svg" alt="" aria-hidden="true">
+      <img class="section-hyacinth poem-hyacinth-right" src="hyacinth-line.svg" alt="" aria-hidden="true">
+
+      <div class="poem-heading reveal">
+        <div>
+          <p class="kicker">The heart of the garden</p>
+          <h2 id="poemSectionTitle">A poem preserved<br><em>in full bloom.</em></h2>
+        </div>
+        <p>This little verse has its own place in the garden. Open it slowly and let every stanza bloom for the birthday boy.</p>
+      </div>
+
+      <div class="poem-sanctuary reveal delay-1" id="poemSanctuary">
+        <div class="poem-aurora" aria-hidden="true"></div>
+        <div class="poem-orbit poem-orbit-one" aria-hidden="true"></div>
+        <div class="poem-orbit poem-orbit-two" aria-hidden="true"></div>
+
+        <div class="poem-flower-column" aria-hidden="true">
+          <img src="hyacinth-glow.svg" alt="">
+          <span class="poem-flower-signal">LOVE // IN BLOOM</span>
+        </div>
+
+        <article class="poem-manuscript" id="poemManuscript">
+          <div class="poem-manuscript-top">
+            <span>HYACINTH VERSE // 0722</span>
+            <i></i>
+            <b>PRIVATE</b>
+          </div>
+
+          <div class="poem-title-wrap">
+            <span class="poem-seal" aria-hidden="true">✿</span>
+            <div>
+              <p>Written with love</p>
+              <h3>For My Birthday Boy, Jess</h3>
+            </div>
+          </div>
+
+          <div class="poem-content" id="poemContent" aria-live="polite">
+            <p class="poem-stanza">
+              <span>Happy birthday, my charming Jess,</span>
+              <span>The sweetest boy, I must confess.</span>
+              <span>So full of energy, bright and fun,</span>
+              <span>You bring me joy like morning sun.</span>
+            </p>
+
+            <p class="poem-stanza">
+              <span>You’re lovable in every way,</span>
+              <span>You make me smile throughout the day.</span>
+              <span>So caring, gentle, warm, and sweet—</span>
+              <span>You make my happy heart complete.</span>
+            </p>
+
+            <p class="poem-stanza">
+              <span>And yes, you’re very intelligent too,</span>
+              <span>Sometimes I can’t keep up with you!</span>
+              <span>But even with that brilliant mind,</span>
+              <span>You’re still the sweetest boy I’ll find.</span>
+            </p>
+
+            <p class="poem-stanza">
+              <span>So make a wish and blow the light,</span>
+              <span>Today is yours—enjoy it right!</span>
+              <span>My energetic, charming boy,</span>
+              <span>You are my love, my pride, my joy.</span>
+            </p>
+
+            <p class="poem-stanza">
+              <span>Happy birthday, Jess, my dear,</span>
+              <span>I’m grateful that you’re always near.</span>
+              <span>No matter where our journey goes,</span>
+              <span>I’ll love you more than anyone knows.</span>
+            </p>
+          </div>
+
+          <div class="poem-controls">
+            <button class="button primary magnetic poem-open-button" id="poemOpenButton" type="button">
+              <span>Let the Poem Bloom</span><strong>✿</strong>
+            </button>
+            <button class="button ghost poem-replay-button" id="poemReplayButton" type="button" hidden>
+              <span>Read It Again</span><strong>↺</strong>
+            </button>
+            <button class="button ghost" id="poemListenButton" type="button">
+              <span>Listen to the Poem</span><strong>◉</strong>
+            </button>
+          </div>
+
+          <div class="poem-progress" aria-hidden="true">
+            <span id="poemProgressBar"></span>
+          </div>
+          <p class="poem-note" id="poemNote">Five stanzas are waiting beneath the petals.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="capsule-section section" id="capsule" aria-labelledby="capsuleTitle">
+      <img class="section-hyacinth capsule-hyacinth" src="hyacinth-glow.svg" alt="" aria-hidden="true">
+      <div class="section-heading reveal">
+        <div>
+          <p class="kicker">Private time capsule // saved on this device</p>
+          <h2 id="capsuleTitle">Plant a message for<br><em>our future selves.</em></h2>
+        </div>
+        <p class="heading-side-copy">This is Ralph’s quiet corner of the garden. Anything written here stays only in this browser and can be opened again on a future visit.</p>
+      </div>
+
+      <div class="capsule-grid reveal delay-1">
+        <form class="capsule-writer" id="capsuleForm">
+          <div class="capsule-writer-head"><span>✿</span><div><small>NEW CAPSULE BLOOM</small><strong>A note from today</strong></div><b id="capsuleCharacterCount">0 / 280</b></div>
+          <label for="capsuleMessage">Write something you want us to remember</label>
+          <textarea id="capsuleMessage" maxlength="280" rows="6" placeholder="Example: Today I felt loved when…"></textarea>
+          <div class="capsule-fields">
+            <label>Open mood<select id="capsuleMood"><option value="grateful">Grateful</option><option value="hopeful">Hopeful</option><option value="playful">Playful</option><option value="forever">Forever</option></select></label>
+            <label>Signature<input id="capsuleSignature" type="text" maxlength="30" value="Ralph" placeholder="Your name"></label>
+          </div>
+          <button class="button primary magnetic" type="submit"><span>Plant This Time Capsule</span><strong>✿</strong></button>
+          <p class="capsule-privacy">Private by design: messages are stored only on this device using local storage.</p>
+        </form>
+
+        <div class="capsule-vault">
+          <div class="capsule-vault-head"><div><p class="micro-label">CAPSULE VAULT</p><h3>Your planted messages</h3></div><span><b id="capsuleCount">0</b> BLOOMS</span></div>
+          <div class="capsule-empty" id="capsuleEmpty"><span>✿</span><strong>No capsule blooms yet.</strong><p>Plant the first note and it will appear here.</p></div>
+          <div class="capsule-list" id="capsuleList" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="surprise-section section" id="surprise">
+      <img class="section-hyacinth surprise-hyacinth" src="hyacinth-line.svg" alt="" aria-hidden="true">
+      <div class="surprise-card everlasting-surprise reveal">
+        <div class="surprise-halo" aria-hidden="true"><span></span><span></span><span></span></div>
+        <p class="kicker">Everlasting surprise // always available</p>
+        <h2>A final flower you can open<br><em>whenever your heart is ready.</em></h2>
+        <p id="surprisePreviewMessage">No date, no countdown, and no waiting—this part of the garden belongs to you anytime you need a reminder of how deeply you are loved.</p>
+
+        <div class="surprise-availability" aria-label="Surprise availability">
+          <span class="availability-dot" aria-hidden="true"></span>
+          <strong>READY NOW</strong>
+          <i></i>
+          <small>OPEN AS MANY TIMES AS YOU LIKE</small>
+        </div>
+
+        <div class="surprise-preview-grid" aria-label="Choose what the surprise opens with">
+          <button class="surprise-preview active" type="button" data-surprise-preview="wish" data-message="Begin with a birthday wish made especially for you—soft, hopeful, and full of blessings.">
+            <span class="surprise-preview-icon">✦</span>
+            <strong>A Wish for You</strong>
+            <small>A blessing for your new year</small>
+          </button>
+          <button class="surprise-preview" type="button" data-surprise-preview="promise" data-message="Begin with three promises from me: to keep choosing us, celebrate you, and build a future beside you.">
+            <span class="surprise-preview-icon">∞</span>
+            <strong>My Promises</strong>
+            <small>Words I want to live by</small>
+          </button>
+          <button class="surprise-preview" type="button" data-surprise-preview="forever" data-message="Begin with the future I keep praying for—the two of us growing, laughing, and growing grey together.">
+            <span class="surprise-preview-icon">✿</span>
+            <strong>Our Forever</strong>
+            <small>A little glimpse of tomorrow</small>
+          </button>
+        </div>
+
+        <button class="button primary magnetic surprise-open-button" id="unlockButton" type="button" data-start-tab="wish">
+          <span>Open Your Everlasting Surprise</span><strong>✿</strong>
+        </button>
+        <p class="surprise-reopen-note">This bloom never locks again. Come back whenever you need it.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer inert>
+    <div class="footer-orb">✿</div>
+    <p>Grown with love, memories, hyacinths, and just enough code.</p>
+    <span>FOR <b id="footerRecipient">MY LOVE</b> // 07.22.2026</span>
+  </footer>
+
+  <dialog class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close photo viewer">×</button>
+    <button class="lightbox-nav prev" id="lightboxPrev" type="button" aria-label="Previous photo">←</button>
+    <figure>
+      <img id="lightboxImage" src="memory-01.jpg" alt="Expanded memory">
+      <figcaption><span id="lightboxNumber">BLOOM // 01</span><strong id="lightboxCaption">One of the moments I keep replaying</strong></figcaption>
+    </figure>
+    <button class="lightbox-favorite" id="lightboxFavoriteButton" type="button" aria-label="Save this memory as a favorite" aria-pressed="false"><span>♡</span><small>Save bloom</small></button>
+    <button class="lightbox-nav next" id="lightboxNext" type="button" aria-label="Next photo">→</button>
+  </dialog>
+
+  <dialog class="birthday-modal surprise-modal" id="birthdayModal">
+    <button class="modal-close" data-close-birthday type="button" aria-label="Close birthday surprise">×</button>
+    <div class="birthday-symbol">✿</div>
+    <p class="kicker">YOUR EVERLASTING BLOOM</p>
+    <h2>Happy Birthday,<br><em id="surpriseName">Ralph James Bates.</em></h2>
+    <p class="surprise-modal-intro">Bunbun, this surprise is not tied to a date. It is here whenever you need warmth, courage, or a reminder that my heart keeps choosing you.</p>
+
+    <div class="surprise-tabs" role="tablist" aria-label="Birthday surprise chapters">
+      <button class="surprise-tab active" type="button" role="tab" aria-selected="true" data-surprise-tab="wish">Birthday Wish</button>
+      <button class="surprise-tab" type="button" role="tab" aria-selected="false" data-surprise-tab="promise">My Promises</button>
+      <button class="surprise-tab" type="button" role="tab" aria-selected="false" data-surprise-tab="forever">Our Forever</button>
+    </div>
+
+    <div class="surprise-pages">
+      <article class="surprise-page active" data-surprise-page="wish">
+        <span class="surprise-page-number">01 // A WISH FOR YOU</span>
+        <h3>May this new year of your life bloom gently.</h3>
+        <p>May God bless you, guide your decisions, protect your family, and fill your days with the kind of peace that stays. May every dream meant for you find its way home.</p>
+        <p>And through every season, may you always remember that you are loved—not only today, but in all the ordinary days that follow.</p>
+      </article>
+
+      <article class="surprise-page" data-surprise-page="promise" hidden>
+        <span class="surprise-page-number">02 // MY PROMISES</span>
+        <h3>Three promises I want to keep choosing.</h3>
+        <div class="promise-grid">
+          <div><b>01</b><p>I will keep choosing us, even when love asks us to be patient and brave.</p></div>
+          <div><b>02</b><p>I will celebrate your wins and stand beside you when life feels heavy.</p></div>
+          <div><b>03</b><p>I will keep building a future where we can laugh, grow, and become grey and old together.</p></div>
+        </div>
+      </article>
+
+      <article class="surprise-page" data-surprise-page="forever" hidden>
+        <span class="surprise-page-number">03 // OUR FOREVER</span>
+        <h3>This is only the beginning of our garden.</h3>
+        <blockquote>“The guy I am with today is the guy I pray to be with until we are grey and old.”</blockquote>
+        <p>I picture more memories, more achievements, more playful arguments, more forgiveness, and more reasons to say, “We still chose each other.”</p>
+        <p>Whatever the future brings, I hope we continue meeting it hand in hand—still makulit, still learning, and still in love.</p>
+      </article>
+    </div>
+
+    <section class="wish-planter" aria-labelledby="wishPlanterTitle">
+      <div><p class="micro-label">PLANT A PERSONAL WISH</p><h3 id="wishPlanterTitle">Leave a wish in the garden.</h3></div>
+      <div class="wish-planter-row">
+        <input id="personalWishInput" type="text" maxlength="100" placeholder="Write one birthday wish…" aria-label="Personal birthday wish">
+        <button class="button primary" id="wishButton" type="button"><span>Plant Wish</span><strong>✧</strong></button>
+      </div>
+      <div class="planted-wishes" id="plantedWishes" aria-live="polite"></div>
+    </section>
+    <div class="surprise-modal-actions">
+      <button class="button ghost" data-close-birthday type="button"><span>Return to the Garden</span><strong>↓</strong></button>
+    </div>
+  </dialog>
+
+
+  <dialog class="settings-dialog" id="settingsDialog" aria-labelledby="settingsTitle">
+    <button class="modal-close" id="settingsClose" type="button" aria-label="Close garden settings">×</button>
+    <p class="kicker">PERSONALIZE THE ATMOSPHERE</p>
+    <h2 id="settingsTitle">Garden settings</h2>
+    <p>Change the visual mood without changing any of your memories or messages.</p>
+    <div class="settings-group">
+      <span>COLOR BLOOM</span>
+      <div class="theme-options" role="group" aria-label="Choose a color theme">
+        <button type="button" data-theme="amethyst" class="active" aria-pressed="true"><i></i><b>Amethyst</b><small>Original hyacinth</small></button>
+        <button type="button" data-theme="moonlight" aria-pressed="false"><i></i><b>Moonlight</b><small>Blue violet</small></button>
+        <button type="button" data-theme="rose" aria-pressed="false"><i></i><b>Rose Bloom</b><small>Pink lilac</small></button>
+      </div>
+    </div>
+    <div class="settings-toggle-row">
+      <label><span><b>Ambient petals</b><small>Floating petals across the garden</small></span><input id="particlesToggle" type="checkbox" checked><i></i></label>
+      <label><span><b>Motion effects</b><small>Tilts, orbits, and reveal animations</small></span><input id="motionToggle" type="checkbox" checked><i></i></label>
+      <label><span><b>Soft glow</b><small>Cursor and botanical lighting</small></span><input id="glowToggle" type="checkbox" checked><i></i></label>
+    </div>
+    <button class="button ghost settings-reset" id="settingsReset" type="button"><span>Restore Original Garden</span><strong>↺</strong></button>
+  </dialog>
+
+  <dialog class="navigator-dialog" id="navigatorDialog" aria-labelledby="navigatorTitle">
+    <div class="navigator-head">
+      <span>✿</span>
+      <div><p class="micro-label">GARDEN NAVIGATOR</p><h2 id="navigatorTitle">Where should we go?</h2></div>
+      <button class="modal-close" id="navigatorClose" type="button" aria-label="Close garden navigator">×</button>
+    </div>
+    <label class="navigator-search" for="navigatorSearch"><span>⌕</span><input id="navigatorSearch" type="search" placeholder="Search memories, letter, poem, capsule…" autocomplete="off"><kbd>ESC</kbd></label>
+    <div class="navigator-results" id="navigatorResults">
+      <button type="button" data-jump="home"><b>01</b><span><strong>Home</strong><small>Birthday hero and live dashboard</small></span><i>↗</i></button>
+      <button type="button" data-jump="memories"><b>02</b><span><strong>Memory Garden</strong><small>Twenty photographs and favorites</small></span><i>↗</i></button>
+      <button type="button" data-jump="constellation"><b>03</b><span><strong>Our Constellation</strong><small>Explore memories as stars</small></span><i>↗</i></button>
+      <button type="button" data-jump="signals"><b>04</b><span><strong>Love in Bloom</strong><small>Six reasons my heart chooses you</small></span><i>↗</i></button>
+      <button type="button" data-jump="letter"><b>05</b><span><strong>Love Letter</strong><small>Decode, listen, and keep the message</small></span><i>↗</i></button>
+      <button type="button" data-jump="poem"><b>06</b><span><strong>Birthday Poem</strong><small>Let each stanza bloom</small></span><i>↗</i></button>
+      <button type="button" data-jump="capsule"><b>07</b><span><strong>Time Capsule</strong><small>Plant a message for the future</small></span><i>↗</i></button>
+      <button type="button" data-jump="surprise"><b>08</b><span><strong>Everlasting Surprise</strong><small>Wishes, promises, and forever</small></span><i>↗</i></button>
+    </div>
+    <p class="navigator-tip"><kbd>⌘/CTRL</kbd> + <kbd>K</kbd> opens this navigator anywhere in the garden.</p>
+  </dialog>
+
+  <aside class="garden-console" id="gardenConsole" aria-label="Garden controls" aria-hidden="true" inert>
+    <div class="garden-console-summary">
+      <span class="garden-console-flower" aria-hidden="true">✿</span>
+      <div>
+        <small id="currentSectionLabel">HOME</small>
+        <strong>Perfect — Ed Sheeran</strong>
+      </div>
+    </div>
+
+    <button class="console-play" id="consolePlayButton" type="button" aria-label="Play background music"><span>▶</span></button>
+
+    <div class="console-media">
+      <input class="console-seek" id="musicSeek" type="range" min="0" max="100" value="0" step="0.1" aria-label="Song progress">
+      <div class="console-time"><time id="musicCurrentTime">0:00</time><span>/</span><time id="musicDuration">0:00</time></div>
+    </div>
+
+    <label class="console-volume" for="musicVolume">
+      <span aria-hidden="true">VOL</span>
+      <input id="musicVolume" type="range" min="0" max="1" value="0.7" step="0.05" aria-label="Music volume">
+    </label>
+
+    <button class="console-action" id="consoleFavoritesButton" type="button" aria-label="Open favorite memories"><span>♡</span><b id="consoleFavoriteCount">0</b></button>
+    <button class="console-action" id="scrollTopButton" type="button" aria-label="Return to the top">↑</button>
+    <button class="console-expand" id="consoleExpandButton" type="button" aria-expanded="false" aria-label="Expand garden controls">⌃</button>
+    <span class="connection-status" id="connectionStatus" aria-live="polite">ONLINE</span>
+  </aside>
+
+  <audio id="backgroundMusic" loop preload="metadata" playsinline><source src="your-song.mp3" type="audio/mpeg"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="garden-github-safe.js?v=1"></script>
+</body>
+</html>
