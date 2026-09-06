@@ -7,7 +7,7 @@ IMPORTANT: Do NOT upload the ZIP file itself. GitHub Pages does not extract it.
 3. In GitHub, open your repository and choose Add file > Upload files.
 4. Upload the files in small batches if necessary:
    - First: index.html, garden-github-safe.css, garden-github-safe.js, the two SVG files, favicon, .nojekyll, and 404.html.
-   - Second: memory-01.jpg through memory-10.jpg.
+   - Second: memory-01.jpg through memory-10.jpg, and milestone-president.jpg.
    - Third: memory-11.jpg through memory-20.jpg.
    - Last: your-song.mp3.
 5. Commit the uploads.
